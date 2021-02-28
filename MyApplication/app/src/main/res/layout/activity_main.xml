@@ -20,6 +20,39 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        tools:context=".MainActivity"
+        android:background="#c6cabd"
+        >
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="32sp"
+            android:textColor="#ff0e13"
+            />
+        <EditText
+            android:id="@+id/et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv"
+            android:autofillHints="put a yt link here..."
+            android:inputType="text"
+            tools:ignore="LabelFor" />
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Get EditText Text"
+            android:layout_below="@id/et"
+            />
+    </RelativeLayout>
+
+
     <include layout="@layout/content_main" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

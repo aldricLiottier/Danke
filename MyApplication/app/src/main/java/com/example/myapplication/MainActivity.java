@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.yausername.ffmpeg.FFmpeg;
 import com.yausername.youtubedl_android.YoutubeDL;
 import com.yausername.youtubedl_android.YoutubeDLException;
 import com.yausername.youtubedl_android.YoutubeDLRequest;
@@ -18,7 +19,10 @@ import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -27,6 +31,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import static android.widget.Toast.makeText;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,6 +60,14 @@ public class MainActivity extends AppCompatActivity {
         } catch (YoutubeDLException e) {
             Log.e(TAG, "failed to initialize youtubedl-android", e);
         }
+
+        try {
+            YoutubeDL.getInstance().init(getApplication());
+            FFmpeg.getInstance().init(getApplication());
+        } catch (YoutubeDLException e) {
+            Log.e(TAG, "failed to initialize youtubedl-android", e);
+        }
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +86,31 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+        Button btn = (Button) findViewById(R.id.btn);
+        final TextView tv = (TextView) findViewById(R.id.tv);
+        final EditText et = (EditText) findViewById(R.id.et);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String yt = et.getText().toString();
+                yt = "https://youtu.be/" + yt;
+                makeText(getBaseContext(), yt,
+                        Toast.LENGTH_LONG).show();
+                try {
+                    mymymy(yt);
+                } catch (YoutubeDLException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                makeText(getBaseContext(), yt,
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
     @Override
